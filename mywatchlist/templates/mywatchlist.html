@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+  <h1>Assignment 3 PBP/PBD</h1>
+
+  {% if num_watched > num_not_watched %}
+    <h3>Selamat, kamu sudah banyak menonton!</h3>
+  {% else %}
+    <h3>Wah, kamu masih sedikit menonton!</h3>
+  {% endif %}
+
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Rating</th>
+      <th>Release Date</th>
+      <th>Watched</th>
+      <th>Review</th>
+    </tr>
+    {% for movie in list_movie_item %}
+        <tr>
+            <th>{{movie.title}}</th>
+            <th>{{movie.rating}}</th>
+            <th>{{movie.release_date}}</th>
+            <th>{{movie.watched}}</th>
+            <th>{{movie.review}}</th>
+        </tr>
+    {% endfor %}
+  </table>
+
+ {% endblock content %}

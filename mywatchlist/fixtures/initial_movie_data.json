@@ -1,0 +1,114 @@
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {    
+            "watched": true,
+            "title": "Interstellar",
+            "rating": 4,
+            "release_date": "2014-10-06",
+            "review": "Mankind was born on Earth. It was never meant to die here."
+
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 2,
+        "fields": {    
+            "watched": false,
+            "title": "Django Unchained",
+            "rating": 5,
+            "release_date": "2013-02-13",
+            "review": "I like the way you die, boy!"
+
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields": {    
+            "watched": false,
+            "title": "Fargo",
+            "rating": 0,
+            "release_date": "1996-03-08",
+            "review": "There's more to life than a little money, you know. And here ya' are, and it's a beautiful day."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 4,
+        "fields": {    
+            "watched": true,
+            "title": "Inglourious Basterds",
+            "rating": 3,
+            "release_date": "2009-10-16",
+            "review": "[very bad Italian accent] Arriverderci."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 5,
+        "fields": {    
+            "watched": true,
+            "title": "Midnight in Paris",
+            "rating": 4,
+            "release_date": "2011-08-04",
+            "review": "We all fear death and question our place in the universe. The artist's job is not to succumb to despair, but to find an antidote for the emptiness of existence."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 6,
+        "fields": {    
+            "watched": false,
+            "title": "Fantastic Mr. Fox",
+            "rating": 5,
+            "release_date": "2009-11-13",
+            "review": "We are all different but there's something kind of fantastic about that, isn't there?"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 7,
+        "fields": {    
+            "watched": true,
+            "title": "Dead Poets Society",
+            "rating": 1,
+            "release_date": "1989-06-02",
+            "review": "O Captain! My Captain!"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 8,
+        "fields": {    
+            "watched": true,
+            "title": "The Hateful Eight",
+            "rating": 2,
+            "release_date": "2016-01-19",
+            "review": "The only time black folks are safe, is when white folks is disarmed."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 9,
+        "fields": {    
+            "watched": true,
+            "title": "12 Angry Men",
+            "rating": 4,
+            "release_date": "2016-01-19",
+            "review": "It takes a great deal of courage to stand alone even if you believe in something very strongly."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 10,
+        "fields": {    
+            "watched": false,
+            "title": "Nightcrawler",
+            "rating": 3,
+            "release_date": "2016-01-19",
+            "review": "Why you pursue something is as important as what you pursue."
+        }
+    }
+]
