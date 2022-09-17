@@ -24,6 +24,6 @@ def show_xml_by_id(request, id):
 data = MyWatchList.objects.all()
 context = {
     "list_movie_item": data,
-    "num_watched": MyWatchList.objects.filter(watched=True).count(),
-    "num_not_watched": MyWatchList.objects.filter(watched=False).count(),
+    # "num_watched": MyWatchList.objects.filter(watched=True).count(),
+    # "num_not_watched": MyWatchList.objects.filter(watched=False).count(),
 }
