@@ -29,7 +29,7 @@
         "fields": {    
             "watched": false,
             "title": "Fargo",
-            "rating": 0,
+            "rating": 1,
             "release_date": "1996-03-08",
             "review": "There's more to life than a little money, you know. And here ya' are, and it's a beautiful day."
         }
@@ -82,7 +82,7 @@
         "model": "mywatchlist.mywatchlist",
         "pk": 8,
         "fields": {    
-            "watched": true,
+            "watched": false,
             "title": "The Hateful Eight",
             "rating": 2,
             "release_date": "2016-01-19",
