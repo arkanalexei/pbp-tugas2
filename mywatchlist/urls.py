@@ -4,7 +4,7 @@ from mywatchlist.views import show_xml
 from mywatchlist.views import show_json 
 from mywatchlist.views import show_json_by_id
 from mywatchlist.views import show_xml_by_id
-from mywatchlist.views import show_mywatchlist
+
 app_name = 'mywatchlist'
 
 urlpatterns = [
