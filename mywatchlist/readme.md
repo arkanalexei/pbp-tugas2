@@ -109,4 +109,11 @@ def show_mywatchlist(request):
 Proses ini sama persis seperti di tutorial. Pertama kita harus membuat app baru di Heroku. Lalu menambahkan secret yakni Heroku app name dan api key di secret repo kita. Lalu tinggal deploy deh!
 
 ## POSTMAN
+### HTML
 ![HTML](assets/html.png)
+
+### JSON
+![HTML](assets/json.png)
+
+### XML
+![HTML](assets/xml.png)
