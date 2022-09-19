@@ -48,7 +48,7 @@ Pada urls.py di project_django, tambahkan
 path('mywatchlist/', include('mywatchlist.urls')),
 ```
 dan jangan lupa masukkan mywatchlist di installed apps.
-### Membuat model MyWatchList dengan beberapa tribut
+### Membuat model MyWatchList dengan beberapa atribut
 Pada models.py di folder app mywatchlist, tambahkan
 ```py
 class MyWatchList(models.Model):
@@ -100,9 +100,13 @@ def show_json_by_id(request, id):
 
 def show_xml_by_id(request, id):
     data = MyWatchList.objects.filter(pk=id)
-    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")   
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml") 
+
+def show_mywatchlist(request):
+    return render(request, "mywatchlist.html", context)
 ```
 ### Deployment ke Heroku
 Proses ini sama persis seperti di tutorial. Pertama kita harus membuat app baru di Heroku. Lalu menambahkan secret yakni Heroku app name dan api key di secret repo kita. Lalu tinggal deploy deh!
 
 ## POSTMAN
+![HTML](assets/html.png)
