@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Welcome back, {{user}}!</h3>
+
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>Title: </td>
+            <td><input type="text" name="title" placeholder="Nyuci baju" class="form-control"></td>
+        </tr>
+                
+        <tr>
+            <td>Description: </td>
+            <td><input type="text" name="description" placeholder="Pakai deterjen biar bersih" class="form-control"></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input class="btn login_btn" type="submit" value="Tambah Task Baru"></td>
+        </tr>
+    </table>
+</form>
+
+
+<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+{% endblock content %}

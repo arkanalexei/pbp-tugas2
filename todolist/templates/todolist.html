@@ -1,0 +1,32 @@
+<!-- Membuat halaman utama todolist yang memuat username pengguna,
+tombol Tambah Task Baru, tombol logout, serta tabel berisi tanggal pembuatan task, judul task,
+dan deskripsi task. -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Welcome back, {{username}}!</h3>
+
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+<button><a href="{% url 'todolist:create-task' %}">Create Task</a></button>
+
+<table>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>User</th>
+    </tr>
+    {% for task in tasks %}
+        <tr>
+            <th>{{task.title}}</th>
+            <th>{{task.description}}</th>
+            <th>{{task.date}}</th>
+            <th>{{task.user}}</th>
+        </tr>
+    {% endfor %}
+  </table>
+
+
+{% endblock content %}
