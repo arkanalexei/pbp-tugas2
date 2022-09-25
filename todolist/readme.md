@@ -23,7 +23,7 @@ Ya, tentu saja bisa. Kenapa tidak memangnya? Saya buktikan bahwa kita bisa membu
     <li>Jika semua data valid, save data tersebut dan lakukan sesuai logic yang kita inginkan. Misal untuk form isi feedback, kirim isi feedback tersebut ke email kita. Kalau merupakan sebuah search, maka tampilkan hasil search. Atau dalam konteks tugas 3 ini maka buat task baru sesuai dengan input title dan description</li>
 </ul>
 Untuk penjelasan secara visual ada di bagan ini:
-![bagan](assets/images/form_handling_-_standard.png)
+![bagan](assets/form_handling_-_standard.png)
 
 Sumber: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms
 
