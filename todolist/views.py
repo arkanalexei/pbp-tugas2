@@ -1,3 +1,4 @@
+from ast import Delete
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
@@ -12,8 +13,39 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from todolist.models import Task
 from todolist.forms import TaskForm
+from todolist.forms import UpdateForm
+
+
 
 # Create your views here.
+def update_task(request, task_id):
+	queryset = Task.objects.get(id=task_id)
+	form = UpdateForm(instance=queryset)
+	if request.method == 'POST':
+		form = UpdateForm(request.POST, instance=queryset)
+		if form.is_valid():
+			form.save()
+			return redirect('todolist:show_todolist')
+
+	context = {
+		'form':form
+		}
+
+	return render(request, 'update_task.html', context)
+
+def delete_task(request,task_id):
+    queryset = Task.objects.get(id=task_id)
+    if request.method == 'POST':
+        queryset.delete()
+        return redirect('todolist:show_todolist')
+    
+    context = {
+        'task':queryset
+    }
+    return render(request, 'delete_task.html', context)
+
+
+
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
     tasks = Task.objects.filter(user=request.user)
