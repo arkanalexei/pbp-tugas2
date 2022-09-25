@@ -18,6 +18,7 @@ from todolist.forms import UpdateForm
 
 
 # Create your views here.
+@login_required(login_url='/todolist/login/')
 def update_task(request, task_id):
 	queryset = Task.objects.get(id=task_id)
 	form = UpdateForm(instance=queryset)
@@ -33,6 +34,7 @@ def update_task(request, task_id):
 
 	return render(request, 'update_task.html', context)
 
+@login_required(login_url='/todolist/login/')
 def delete_task(request,task_id):
     queryset = Task.objects.get(id=task_id)
     if request.method == 'POST':

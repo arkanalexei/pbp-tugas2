@@ -6,8 +6,26 @@ https://tugas-2-pbp-arkan.herokuapp.com/todolist/
 CSRF atau Cross-Site Request Forgery token adalah merupakan sebuah cara agar sebuah aplikasi bisa menentukan apabila request HTTP tersebut merupakan benar dibuat oleh aplikasi tersebut. CSRF token sendiri adalah sebuah token dengan nilai random yang besar untuk menjamin keamanannya dan digunakan untuk mencegah penyerangan CSRF. Oleh karena itu, token tersebut harus unik untuk setiap user. Token tersebut dibuat unik untuk setiap session user dan disembunyikan parameter HTML untuk operasi-operasi server side yang kemudian dikirim ke browser klien. Sehingga ketika sebuah user melakukan sesuatu, aksi tersebut harus disertakan CSRF token sebagai alat verifikasi. Apabila CSRF token tidak dimasukkan, kita tidak tahu apabila request tersebut benar-benar dari user.
   
 ## Apakah kita dapat membuat elemen <form> secara manual (tanpa menggunakan generator seperti {{ form.as_table }})? Jelaskan secara gambaran besar bagaimana cara membuat <form> secara manual.
+Ya, tentu saja bisa. Kenapa tidak memangnya? Saya buktikan bahwa kita bisa membuat form tanpa {{ form.as_table }} dengan kode html saya di app ini. Cara render form tersebut juga gampang. Pada salah satu fungsi views.py, saya menambahkan context dengan key 'form' dan value form dimana value form disini adalah UpdateForm(instance=queryset). Ini saya ambil contoh dari kode fungsi update_task(request, task_id) saya. Setelah dimasukkan di context, pada html anda (ini salah satu bagian kode update_task.html saya) anda referensikan variable form tersebut. Sehingga hasilnya kerender di html.
+```html
+<form method="POST" action="">{% csrf_token %}
+		{{form}}
+		<input class="btn btn-sm btn-success" type="submit" value="Update" name="Update">
+	</form>
+```
  
 ## Jelaskan proses alur data dari submisi yang dilakukan oleh pengguna melalui HTML form, penyimpanan data pada database, hingga munculnya data yang telah disimpan pada template HTML.
+<ul>
+    <li>Tampilkan form default yang user request. Apabila form ini baru, mungkin isi defaultnya kosong. Kalau tidak, mungkin sudah ada nilai lain.</li>
+    <li>Mendapatkan data dari user melalui request submit</li>
+    <li>Bersihkan dan validasi data tersebut</li>
+    <li>Apabila ada data yang tidak valid, beri peringatan ke user mengenai data mana yang tidak valid dan prompt ulang</li>
+    <li>Jika semua data valid, save data tersebut dan lakukan sesuai logic yang kita inginkan. Misal untuk form isi feedback, kirim isi feedback tersebut ke email kita. Kalau merupakan sebuah search, maka tampilkan hasil search. Atau dalam konteks tugas 3 ini maka buat task baru sesuai dengan input title dan description</li>
+</ul>
+Untuk penjelasan secara visual ada di bagan ini:
+![bagan](assets/images/form_handling_-_standard.png)
+
+Sumber: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
 ### Membuat suatu aplikasi baru bernama todolist di proyek tugas Django yang sudah digunakan sebelumnya.
