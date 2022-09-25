@@ -170,5 +170,5 @@ urlpatterns = [
 ### Melakukan deployment ke Heroku terhadap aplikasi yang sudah kamu buat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
 Proses ini sama persis seperti di tutorial. Pertama kita harus membuat app baru di Heroku. Lalu menambahkan secret yakni Heroku app name dan api key di secret repo kita. Lalu tinggal deploy deh!
 ### Membuat dua akun pengguna dan tiga dummy data menggunakan model Task pada akun masing-masing di situs web Heroku.
-Register akun 1 --> login akun 1 --> Create 3 tasks --> logout
+Register akun 1 --> login akun 1 --> Create 3 tasks --> logout <br>
 Register akun 2 --> login akun 2 --> Create 3 tasks --> logout
