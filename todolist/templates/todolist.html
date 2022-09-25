@@ -27,7 +27,11 @@ dan deskripsi task. -->
             <th>{{task.description}}</th>
             <th>{{task.date}}</th>
             <th>{{task.user}}</th>
-            <th>{{task.is_finished}}</th>
+            {% if task.is_finished %}
+                <th>Selesai</th>
+            {% else %}
+                <th>Belum Selesai</th>
+            {% endif %}
             <th><a class="btn btn-sm btn-light" href="{% url 'todolist:update_task' task.id %}">Update</a></th>
             <th><a href="{% url 'todolist:delete_task' task.id %}">Delete</a>
         </tr>
