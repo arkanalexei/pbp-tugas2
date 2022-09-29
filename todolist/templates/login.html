@@ -1,45 +1,64 @@
 {% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
 {% block meta %}
 <title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 {% endblock meta %}
+</head>
 
-{% block content %}
-
-<div class = "login">
-
-    <h1>Login</h1>
-
+<body>
+    {% block content %}
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+        <div class="section">
+            <div class="container">
+                <div class="row full-height justify-content-center">
+                    <div class="col-12 text-center align-self-center py-5">
+                        <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                            <div class="card-3d-wrap mx-auto">
+                                <div class="card-3d-wrapper">
+                                    <div class="card-front">
+                                        <div class="center-wrap">
+                                            <div class="section text-center">
+                                                    <h4 class="mb-4 pb-3">Login</h4>
+                                                <div class="form-group">
+                                                    <input type="text" name="username" placeholder="Your Username" class="form-style" autocomplete="off">
+                                                    <i class="input-icon bi bi-person-fill"></i>
+                                                </div>	
+                                                <div class="form-group mt-2">
+                                                    <input type="password" name="password" placeholder="Your Password" class="form-style" autocomplete="off">
+                                                    <i class="input-icon bi bi-lock-fill"></i>
+                                                </div>
+                                                <input class="btn login_btn mt-4" type="submit" value="Submit">
+                                                
+                                                {% if messages %}
+                                                    <ul>
+                                                        {% for message in messages %}
+                                                            <li class="mb-0 mt-4 text-center">{{ message }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %} 
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
+                                                <p class="mb-0 mt-4 text-center">Belum punya akun? <a href="{% url 'todolist:register' %}" class="link">Buat Akun</a></p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
-
-</div>
-
-{% endblock content %}
+    {% endblock content %}
+</body>
