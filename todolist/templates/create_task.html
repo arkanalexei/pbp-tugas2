@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <!-- <link href="static/css/styles.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'css/create_task.css' %}">
     {% endblock meta %}
 </head>
 
@@ -19,48 +19,31 @@
 
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Create New Task</a>
-            <button type="button" class="btn btn-light"><a href="{% url 'todolist:logout' %}">Logout</a></button>
+            <h5 class="navbar-brand">Create New Task</h5>
+
+            <div class="nav navbar-nav navbar-right">
+                <button type="button" class="btn btn-light"><a href="{% url 'todolist:show_todolist' %}">Back</a></button>
+                <button type="button" class="btn btn-light"><a href="{% url 'todolist:logout' %}">Logout</a></button>
+            </div>
         </div>
     </nav>
 
     <br>
     <form method="POST" action="">
         {% csrf_token %}
-        <div class="row">
-            <div class="col">
-                <input type="text" name="title" placeholder="Task Title" class="form-control">
-            </div>
-            <div class="col">
-                <input type="text" name="description" placeholder="Task Description" class="form-control">
-            </div>
-            <div class="col">
-                <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru">
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-row">
+                    <input type="text" name="title" placeholder="Task Title" class="form-control">
+                </div>
+                <div class="d-flex flex-row">
+                    <input type="text" name="description" placeholder="Task Description" class="form-control">
+                </div>
+                <div class="d-flex flex-row align-items-center">
+                    <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru">
+                </div>
             </div>
         </div>
     </form>
-
-    <!-- <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Title: </td>
-                <td><input type="text" name="title" placeholder="Nyuci baju" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Description: </td>
-                <td><input type="text" name="description" placeholder="Pakai deterjen biar bersih" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Tambah Task Baru"></td>
-            </tr>
-        </table>
-    </form> -->
-
-
-    <!-- <button><a href="{% url 'todolist:logout' %}">Logout</a></button> -->
     {% endblock content %}
 </body>

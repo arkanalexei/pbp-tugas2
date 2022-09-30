@@ -1,0 +1,42 @@
+.card:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.card {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+a {
+    text-decoration: none;
+    float: right;
+    color: black;
+  }
+
+.btn-light {
+    margin-right: 5px;
+}
+.btn-primary {
+    margin-right: 5px;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.user {
+display: block;
+}
+
+.login {
+display: none;
+}
+
+.wrapper:hover .user {
+display: none;
+}
+
+.wrapper:hover .login {
+display: block;
+}
