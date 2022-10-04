@@ -191,3 +191,103 @@ Proses ini sama persis seperti di tutorial. Pertama kita harus membuat app baru 
 ### Membuat dua akun pengguna dan tiga dummy data menggunakan model Task pada akun masing-masing di situs web Heroku.
 Register akun 1 --> login akun 1 --> Create 3 tasks --> logout <br>
 Register akun 2 --> login akun 2 --> Create 3 tasks --> logout
+
+# README Tugas 5
+
+## Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
+Secara garis besar, ketiga hal ini adalah cara-cara berbeda dalam menerapkan CSS dalam HTML kita. Untuk inline, kita mendefinisikan styling CSS kita langsung di tag html tersebut. Contoh:<br>
+```html
+<h3 style="color:orange; font-style:italic; text-decoration: underline; ">Ada apa dengan Cicak (bin Kadal)?</h1>
+```
+Kelebihan Inline CSS:
+<ol>
+    <li>Quick and easy to apply</li>
+    <li>Smaller HTTP request</li>
+    <li>Bagus untuk menguji perubahan setiap element</li>
+</ol>
+
+Kekurangan Inline CSS:
+<ol>
+    <li>Tidak efisien karena hanya diterapkan ke satu elemen</li>
+</ol>
+
+<br>
+Lalu internal CSS adalah dimana kita mendefinisikan styling CSS kita di tag html <style></style> didalam <head></head>. Sebagai contoh:<br>
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+        background-color: black;
+        }
+
+        h3 {
+        color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- bla bla -->
+</body>
+</html>
+```
+Kelebihan Internal CSS:
+<ol>
+    <li>CSS diterapkan ke satu halaman</li>
+    <li>Bisa menggunakan selector class dan id</li>
+    <li>Tidak perlu menyediaka file css external</li>
+</ol>
+
+Kekurangan Internal CSS:
+<ol>
+    <li>Increase web access time</li>
+    <li>CSS diterapkan ke satu halaman (ini kelebihan dan kekurangan karena tergantung situasi & kondisi)</li>
+</ol>
+
+<br>
+Dan terakhir adalah external CSS dimana kita mendefinisikan styling CSS kita di file .css tersendiri sehingga kita harus "link" css ke html kita di <head></head>. Contoh:<br>
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">  
+</head>
+</html>
+```
+Sedangkan isi style.css adalah: <br>
+```css
+.card:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.card {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+a {
+    text-decoration: none;
+    float: right;
+    color: black;
+  }
+```
+Kelebihan External CSS:
+<ol>
+    <li>Overall smaller HTML file dan struktur file lebih rapih</li>
+    <li>Faster loading time</li>
+    <li>Bisa reuse css yang sama di html lain</li>
+</ol>
+
+Kekurangan External CSS:
+<ol>
+    <li>Harus menunggu sampai file CSS selesai dipanggil agar kerender sempurna</li>
+</ol>
+
+## Jelaskan tag HTML5 yang kamu ketahui.
+Ada banyak ya, mungkin saya coba list beberapa
+<ol>
+    <li><h1> ke <h6> untuk heading 1 ke 6. Semakin besar angka, semakin kecil tulisannya</li>
+</ol>
