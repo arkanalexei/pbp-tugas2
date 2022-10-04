@@ -221,7 +221,6 @@ Lalu internal CSS adalah dimana kita mendefinisikan styling CSS kita di tag html
         body {
         background-color: black;
         }
-
         h3 {
         color: blue;
         }
@@ -247,7 +246,9 @@ Kekurangan Internal CSS:
 </ol>
 
 <br>
+
 Dan terakhir adalah external CSS dimana kita mendefinisikan styling CSS kita di file .css tersendiri sehingga kita harus "link" css ke html kita di <head></head>. Contoh:<br>
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -262,7 +263,6 @@ Sedangkan isi style.css adalah: <br>
     transform: scale(1.05);
     opacity: 0.9;
 }
-
 .card {
     margin-left: 20px;
     margin-right: 20px;
@@ -289,5 +289,74 @@ Kekurangan External CSS:
 ## Jelaskan tag HTML5 yang kamu ketahui.
 Ada banyak ya, mungkin saya coba list beberapa
 <ol>
-    <li><h1> ke <h6> untuk heading 1 ke 6. Semakin besar angka, semakin kecil tulisannya</li>
+    <li>< h1 > ke < h6 > untuk heading 1 ke 6. Semakin besar angka, semakin kecil tulisannya</li>
+    <li>< head > mendefisikan "kepala" html nya</li>
+    <li>< body > mendefisikan "badan" html nya</li>
+    <li>< nav > mendefisikan "navigasi" html nya, cenderung bentuk navbar</li>
+    <li>< p > untuk paragraf </li>
+    <li>< section > mendefinisikan section html</li>
+    <li>< b > untuk bold</li>
+    <li>< ol > definisikan ordered list</li>
+    <li>< li > item dari list tersebut</li>
+    <li>... Dan masih banyak lagi!</li>
 </ol>
+
+## Jelaskan tipe-tipe CSS selector yang kamu ketahui.
+Beberapa yang saya ketahui:
+<ol>
+    <li>.class1 -> semua elemen dengan class=class1</li>
+    <li>#id1 -> semua elemen dengan id=id1</li>
+    <li>* -> semua elemen</li>
+    <li>element (contoh p, h5, h2) -> semua elemen dengan tag html tersebut</li>
+    <li>:hover -> ketika mouse hover diatas elemen tersebut</li>
+    <li>.. Etc</li>
+</ol>
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+### Kustomisasi templat untuk halaman login, register, dan create-task semenarik mungkin.
+Untuk halaman login dan register saya mendapatkan inspirasi berat dari [codepen](https://codepen.io/ig_design/pen/KKVQpVP). Saya tinggal kustomisasi html serta css saya sehingga bisa terintegrasi dengan html orisinil saya yang disediakan oleh lab 4. Yang sedikit ribet itu di register.html karena form nya itu auto generated. Sehingga aku harus cari cara by opening inspect element di local, lalu baru copy input form nya. Untuk create task itu saya bikin secara sendiri. Tambahkan ini di create_task.html agar bisa pakai bootstrap dan external css
+```html
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/create_task.css' %}">
+```
+Setelah itu tinggal otak-atik css nya sampai saya puas dengan hasilnya. Done!
+
+### Kustomisasi halaman utama todo list menggunakan cards. (Satu card mengandung satu task).
+Tambahkan ini di todolist.html
+```html
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for task in tasks %}
+        <div class="col">
+            <div class="card">
+                {% if task.is_finished %}
+                <div class="card-header text-bg-success text-center">Completed</div>
+                {% else %}
+                <div class="card-header text-bg-warning text-center">Not Yet Completed</div>
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{task.title}}</h5>
+                    <p class="card-text">{{task.description}}</p>
+
+                </div>
+                <div class="card-footer">
+                        <small class="text-muted text-center">Created {{task.date}} by {{task.user}}</small>
+                        <a class="btn btn-sm btn-danger text-end" href="{% url 'todolist:delete_task' task.id %}">Delete</a>
+                        <a class="btn btn-sm btn-primary text-end" href="{% url 'todolist:update_task' task.id %}">Update</a>
+                        
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+```
+Basically bikin grid untuk letak card nya. Lalu untuk setiap task di tasks, bikin card dengan sedemikian rupa. Untuk bagian bonus tinggal tambahin selector :hover untuk card sebagai berikut (inside todolist.css)
+```css
+.card:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+```
+
+### Membuat keempat halaman yang dikustomisasi menjadi responsive.
+By default menggunakan bootstrap sudah menjadi responsive. Jadi tidak perlu implement apa-apa lagi.
