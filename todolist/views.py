@@ -24,12 +24,12 @@ def todolist_add(request):
     if request.method == "POST":
         data = json.loads(request.POST['data'])
 
-        new_task = Task(title=data["title"], description=data["description"])
+        new_task = Task(title=data["title"], description=data["description"], user=request.user)
         new_task.save()
 
         return HttpResponse(serializers.serialize("json", [new_task]), content_type="application/json")
 
-    return redirect('todolist:todolist_add')
+    return HttpResponse()
 
 
 @login_required(login_url='/todolist/login/')

@@ -25,6 +25,7 @@
             <div class="nav navbar-nav navbar-right">
                 <button type="button" id="modal-button" class="btn btn-light"><a
                         href="{% url 'todolist:create-task' %}">Create Task</a></button>
+
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Launch demo modal
@@ -63,11 +64,14 @@
                         <div class="mb-3">
                             <input type="text" name="description" placeholder="Task Description" class="form-control">
                         </div>
+                        <div class="mb-3">
+                            <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru">
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru">
+                    <!-- <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru"> -->
                 </div>
             </div>
         </div>
@@ -76,12 +80,12 @@
     <script type="text/javascript">
         console.log("a")
 
-        $(document).ready(function () {
-
-            // GET
+        var container = document.createElement("div");
+        container.classList.add("row", "row-cols-1", "row-cols-md-4", "g-4");
+        function getTask() {
+            container.innerHTML = "";
             $.get("{% url 'todolist:show_json' %}", function (data) {
-                var container = document.createElement("div");
-                container.classList.add("row", "row-cols-1", "row-cols-md-4", "g-4");
+                
                 $.each(data, function (i, value) {
                     // iterate per task
 
@@ -125,7 +129,7 @@
 
                     var date = document.createElement("small");
                     date.classList.add("text-muted", "text-center");
-                    date.innerHTML = `Created ${field.date} by ${field.user}`;
+                    date.innerHTML = `Created ${field.date}`;
 
                     var updateBtn = document.createElement("a");
                     updateBtn.classList.add("btn", "btn-primary", "btn-sm", "text-end");
@@ -147,7 +151,13 @@
                 document.body.appendChild(container)
 
             })
-            
+        }
+
+        $(document).ready(function () {
+
+            // GET
+            getTask()
+
             // POST
 
             console.log("cretask")
@@ -156,36 +166,38 @@
                 console.log("oi oi oi")
                 var actionurl = e.currentTarget;
                 var formJSON = JSON.stringify($("#createTask").serializeJSON());
-                console.log("json",formJSON)
-                console.log("actionurl",actionurl)
+                console.log("json", formJSON)
+                console.log("actionurl", actionurl)
 
                 $.ajax({
                     type: "POST",
-                    url: "{% url 'todolist:create-task' %}",
+                    url: "{% url 'todolist:todolist_add' %}",
                     data: {
                         data: formJSON,
                         csrfmiddlewaretoken: '{{ csrf_token }}'
                     },
 
-                    success: function(response) {
-                        $(response).each(function(i, value) {
-                            console.log(value);
+                    success: function (response) {
+                        $(response).each(function (i, value) {
+                            console.log("AAAA",value);
                         });
-                        $('#createTask').each(function(){
+                        $('#createTask').each(function () {
                             this.reset();
                         });
                         console.log("mantap sukses");
+                        getTask();
+                        
                     },
 
-                    error: function(xhr, resp, text) {
+                    error: function (xhr, resp, text) {
                         console.log("ada error")
-                        console.log("xhr",xhr)
-                        console.log("resp",resp)
-                        console.log("text",text)
+                        console.log("xhr", xhr)
+                        console.log("resp", resp)
+                        console.log("text", text)
                     }
                 });
             });
-            
+
         });
 
 
