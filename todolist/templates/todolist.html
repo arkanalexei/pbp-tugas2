@@ -23,12 +23,12 @@
                 <h5 class="navbar-brand login">Last Login on {{last_login}}</h5>
             </div>
             <div class="nav navbar-nav navbar-right">
-                <button type="button" id="modal-button" class="btn btn-light"><a
-                        href="{% url 'todolist:create-task' %}">Create Task</a></button>
+                <!-- <button type="button" id="modal-button" class="btn btn-light"><a
+                        href="{% url 'todolist:create-task' %}">Create Task</a></button> -->
 
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Launch demo modal
+                    Create Task
                 </button>
                 <button type="button" class="btn btn-light"><a href="{% url 'todolist:logout' %}">Logout</a></button>
             </div>
@@ -65,14 +65,14 @@
                             <input type="text" name="description" placeholder="Task Description" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru">
+                            <input class="btn login_btn btn-xl btn-primary" type="submit" value="Create Task">
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <!-- <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru"> -->
-                </div>
+                    <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru">
+                </div> -->
             </div>
         </div>
     </div>
