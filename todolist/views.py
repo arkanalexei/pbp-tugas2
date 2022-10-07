@@ -14,10 +14,29 @@ from django.urls import reverse
 from todolist.models import Task
 from todolist.forms import TaskForm
 from todolist.forms import UpdateForm
+import json
 
 
 
 # Create your views here.
+@login_required(login_url='/wishlist/login/')
+def todolist_add(request):
+    if request.method == "POST":
+        data = json.loads(request.POST['data'])
+
+        new_task = Task(title=data["title"], description=data["description"], user=request.user)
+        new_task.save()
+
+        return HttpResponse(serializers.serialize("json", [new_task]), content_type="application/json")
+
+    return HttpResponse()
+
+
+@login_required(login_url='/todolist/login/')
+def show_json(request):
+    tasks = Task.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", tasks), content_type="application/json")
+
 @login_required(login_url='/todolist/login/')
 def update_task(request, task_id):
 	queryset = Task.objects.get(id=task_id)

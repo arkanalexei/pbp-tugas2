@@ -8,7 +8,8 @@
     <title>Todolist</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/todolist.css' %}">
     {% endblock meta %}
 </head>
@@ -22,7 +23,13 @@
                 <h5 class="navbar-brand login">Last Login on {{last_login}}</h5>
             </div>
             <div class="nav navbar-nav navbar-right">
-                <button type="button" class="btn btn-light"><a href="{% url 'todolist:create-task' %}">Create Task</a></button>
+                <button type="button" id="modal-button" class="btn btn-light"><a
+                        href="{% url 'todolist:create-task' %}">Create Task</a></button>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Launch demo modal
+                </button>
                 <button type="button" class="btn btn-light"><a href="{% url 'todolist:logout' %}">Logout</a></button>
             </div>
         </div>
@@ -30,7 +37,204 @@
 
     <br>
 
-    <div class="row row-cols-1 row-cols-md-4 g-4">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/jquery.serializejson.min.js' %}"></script>
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Task</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="" id="createTask">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" name="title" placeholder="Task Title" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="description" placeholder="Task Description" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        console.log("a")
+
+        var container = document.createElement("div");
+        container.classList.add("row", "row-cols-1", "row-cols-md-4", "g-4");
+        function getTask() {
+            container.innerHTML = "";
+            $.get("{% url 'todolist:show_json' %}", function (data) {
+                
+                $.each(data, function (i, value) {
+                    // iterate per task
+
+                    var field = value.fields;
+                    console.log(value);
+
+                    var col = document.createElement("div");
+                    col.classList.add("col");
+
+                    var card = document.createElement("div");
+                    card.classList.add("card");
+                    col.appendChild(card);
+
+                    var header = document.createElement("div");
+                    if (field.is_finished == true) {
+                        header.classList.add("card-header", "text-bg-success", "text-center");
+                        header.innerHTML = "Completed";
+                    } else {
+                        header.classList.add("card-header", "text-bg-warning", "text-center")
+                        header.innerHTML = "Not Yet Completed";
+                    }
+
+                    var body = document.createElement("div");
+                    body.classList.add("card-body");
+                    var title = document.createElement("h5");
+                    title.classList.add("card-title");
+                    title.innerHTML = field.title;
+                    var desc = document.createElement("p");
+                    desc.classList.add("card-text");
+                    desc.innerHTML = field.description;
+
+                    body.appendChild(title);
+                    body.appendChild(desc);
+
+                    var footer = document.createElement("div");
+                    footer.classList.add("card-footer");
+
+                    card.appendChild(header);
+                    card.appendChild(body);
+                    card.appendChild(footer);
+
+                    var date = document.createElement("small");
+                    date.classList.add("text-muted", "text-center");
+                    date.innerHTML = `Created ${field.date}`;
+
+                    var updateBtn = document.createElement("a");
+                    updateBtn.classList.add("btn", "btn-primary", "btn-sm", "text-end");
+                    updateBtn.innerHTML = "Update";
+                    updateBtn.href = "/todolist/update_task/" + value.pk + "/";
+
+                    var deleteBtn = document.createElement("a");
+                    deleteBtn.classList.add("btn", "btn-danger", "btn-sm", "text-end");
+                    deleteBtn.innerHTML = "Delete";
+                    deleteBtn.href = "/todolist/delete_task/" + value.pk + "/";
+
+                    footer.appendChild(date);
+                    footer.appendChild(deleteBtn);
+                    footer.appendChild(updateBtn);
+
+                    container.appendChild(col);
+                })
+
+                document.body.appendChild(container)
+
+            })
+        }
+
+        $(document).ready(function () {
+
+            // GET
+            getTask()
+
+            // POST
+
+            console.log("cretask")
+            $("#createTask").submit(function (e) {
+                e.preventDefault();
+                console.log("oi oi oi")
+                var actionurl = e.currentTarget;
+                var formJSON = JSON.stringify($("#createTask").serializeJSON());
+                console.log("json", formJSON)
+                console.log("actionurl", actionurl)
+
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'todolist:todolist_add' %}",
+                    data: {
+                        data: formJSON,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+
+                    success: function (response) {
+                        $(response).each(function (i, value) {
+                            console.log("AAAA",value);
+                        });
+                        $('#createTask').each(function () {
+                            this.reset();
+                        });
+                        console.log("mantap sukses");
+                        getTask();
+                        
+                    },
+
+                    error: function (xhr, resp, text) {
+                        console.log("ada error")
+                        console.log("xhr", xhr)
+                        console.log("resp", resp)
+                        console.log("text", text)
+                    }
+                });
+            });
+
+        });
+
+
+
+    </script>
+
+
+    <!-- <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Task</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="addTaskForm">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <fieldset>
+                            <input class="form-control mb-3" type="text" placeholder="Task Title" name="title">
+                            <textarea class="form-control mb-3" rows="3" placeholder="Description"
+                                name="description"></textarea>
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btnClick">Submit</button>
+                    </div>
+                </form>
+    
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+    <!-- <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for task in tasks %}
         <div class="col">
             <div class="card">
@@ -54,9 +258,9 @@
             </div>
         </div>
     {% endfor %}
-    </div>
+    </div> -->
 
-    
+
 
     {% endblock content %}
 
