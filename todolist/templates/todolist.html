@@ -69,10 +69,6 @@
                         </div>
                     </form>
                 </div>
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input class="btn login_btn btn-xl btn-primary" type="submit" value="Tambah Task Baru">
-                </div> -->
             </div>
         </div>
     </div>
@@ -140,7 +136,6 @@
                     var deleteBtn = document.createElement("a");
                     deleteBtn.classList.add("btn", "btn-danger", "btn-sm", "text-end");
                     deleteBtn.innerHTML = "Delete";
-                    // deleteBtn.href = "/todolist/delete_task/" + value.pk + "/";
                     deleteBtn.setAttribute('onclick', `deleteTask(${value.pk})`);
 
                     footer.appendChild(date);
@@ -181,7 +176,6 @@
             getTask()
 
             // POST
-
             console.log("cretask")
             $("#createTask").submit(function (e) {
                 e.preventDefault();
@@ -209,7 +203,8 @@
                         });
                         console.log("mantap sukses");
                         getTask();
-                        
+
+                        $('#exampleModal').modal('toggle');
                     },
 
                     error: function (xhr, resp, text) {
