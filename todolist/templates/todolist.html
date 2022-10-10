@@ -82,6 +82,7 @@
 
         var container = document.createElement("div");
         container.classList.add("row", "row-cols-1", "row-cols-md-4", "g-4");
+
         function getTask() {
             container.innerHTML = "";
             $.get("{% url 'todolist:show_json' %}", function (data) {
@@ -90,7 +91,7 @@
                     // iterate per task
 
                     var field = value.fields;
-                    console.log(value);
+                    console.log("yez",value);
 
                     var col = document.createElement("div");
                     col.classList.add("col");
@@ -139,7 +140,8 @@
                     var deleteBtn = document.createElement("a");
                     deleteBtn.classList.add("btn", "btn-danger", "btn-sm", "text-end");
                     deleteBtn.innerHTML = "Delete";
-                    deleteBtn.href = "/todolist/delete_task/" + value.pk + "/";
+                    // deleteBtn.href = "/todolist/delete_task/" + value.pk + "/";
+                    deleteBtn.setAttribute('onclick', `deleteTask(${value.pk})`);
 
                     footer.appendChild(date);
                     footer.appendChild(deleteBtn);
@@ -151,6 +153,26 @@
                 document.body.appendChild(container)
 
             })
+        }
+
+        function deleteTask(pk) {
+            var url = `/todolist/delete/${pk}/`;
+            $.ajax({
+                url: `/todolist/delete/${pk}/`,
+                type: "POST",
+                data: {},
+                success: function (result) {
+                    getTask();
+                },
+
+                error: function (xhr, resp, text) {
+                        console.log("ada error cuy")
+                        console.log("url",url)
+                        console.log("xhr", xhr)
+                        console.log("resp", resp)
+                        console.log("text", text)
+                }
+            });
         }
 
         $(document).ready(function () {
@@ -166,6 +188,7 @@
                 console.log("oi oi oi")
                 var actionurl = e.currentTarget;
                 var formJSON = JSON.stringify($("#createTask").serializeJSON());
+                console.log("e", e)
                 console.log("json", formJSON)
                 console.log("actionurl", actionurl)
 
@@ -179,7 +202,7 @@
 
                     success: function (response) {
                         $(response).each(function (i, value) {
-                            console.log("AAAA",value);
+                            
                         });
                         $('#createTask').each(function () {
                             this.reset();
@@ -196,6 +219,7 @@
                         console.log("text", text)
                     }
                 });
+
             });
 
         });

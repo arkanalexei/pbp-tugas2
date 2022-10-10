@@ -15,10 +15,21 @@ from todolist.models import Task
 from todolist.forms import TaskForm
 from todolist.forms import UpdateForm
 import json
+from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 
 
 
 # Create your views here.
+@login_required(login_url='/wishlist/login/')
+@csrf_exempt
+def todolist_delete(request, task_id):
+    if request.method == "POST":
+        data = get_object_or_404(Task, pk=task_id, user=request.user)
+        data.delete()
+        
+    return HttpResponse()
+
 @login_required(login_url='/wishlist/login/')
 def todolist_add(request):
     if request.method == "POST":
